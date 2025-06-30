@@ -1,14 +1,14 @@
 import sys
 import requests
-import urllib
-import Beautifulsoup
-urllib.disable_warnings(urllib.exceptions.InsecureRequestWarning)
+import urllib3
+from bs4 import BeautifulSoup 
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 proxies= {"http":"http://127.0.0.1:8080","https":"https://127.0.0.1:8080"}
 
 def get_csrf_token(s,url):
-    res = s.get(url,verfiy=False,proxies=proxies)
-    soup = Beautifulsoup(res.text,'html.parser')
+    res = s.get(url,verify=False,proxies=proxies)
+    soup = BeautifulSoup(res.text,'html.parser')
     csrf=soup.find("input")["value"]
     return csrf
 
