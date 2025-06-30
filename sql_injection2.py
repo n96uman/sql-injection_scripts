@@ -32,6 +32,6 @@ if __name__== "__main__":
         print("use python3 file.py <url> <sql payload>")
     s=requests.Session()
     if exploit_sqli(s,url,payload):
-        print("the sql injetion is successful")
+        print("the sql injetion is successful we have logged in")
     else:
-        print("the sql injection is not successful")
+        print("the sql injection is not successful we are not logged in")
