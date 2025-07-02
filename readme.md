@@ -45,6 +45,7 @@ if __name__ == "__main__":
 - **Description**: This lab demonstrates SQL injection while handling CSRF tokens. It retrieves the CSRF token from the webpage and uses it to attempt a login with an SQL payload.
 - **Script**: `sql_injection2.py`
 - **Status**: Completed
+
 ```bash
 
 python3 python3 labX_script.py <url> <sql_payload>
@@ -99,6 +100,12 @@ if __name__== "__main__":
 - **Description**: This lab demonstrates SQL injection attack against a vulnerable web application to retrieve the version of the Oracle database USING SQL UNION operator.
 - **Script**: `sql_injection3.py`
 - **Status**: Completed
+- **note**: 
+
+    - to use union you must know the number of colomns. becouse to use union stamtent
+        1. the number and the order of the columns must be the same in all queries.
+        2. the data type must be compatible.
+    - The data base is oracle. in oracle after "select" statement must follow "from" when you try to identify the number of colums .
 
 ```bash
 import sys
