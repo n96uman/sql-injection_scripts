@@ -102,10 +102,10 @@ if __name__== "__main__":
 - **Status**: Completed
 - **note**: 
 
-    - to use union you must know the number of colomns. becouse to use union stamtent
-        1. the number and the order of the columns must be the same in all queries.
-        2. the data type must be compatible.
-    - The data base is oracle. in oracle after "select" statement must follow "from" when you try to identify the number of colums .
+    - To use UNION, you must know the number of columns because:
+        1. The number and order of the columns must be the same in all queries.
+        2. The data types must be compatible.
+    - The database is Oracle. In Oracle, after the SELECT statement, the FROM clause must follow when you try to identify the number of columns.
 
 ```bash
 import sys
