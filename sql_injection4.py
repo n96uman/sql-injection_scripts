@@ -12,7 +12,7 @@ proxies = {
 def index_guess(url, payload):
     for i in range(1, 50):
         path = "/filter?category=Gifts"
-        r = requests.get(url + path + payload,Verify=False, proxies=proxies)  
+        r = requests.get(url + path + payload,verify=False, proxies=proxies)  
         
         if r.status_code == 200 in r.text:
             return i
