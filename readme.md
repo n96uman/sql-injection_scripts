@@ -184,7 +184,7 @@ if __name__ == "__main__":
         print("There is an error or no index for the SQL.")
 ```
 
-## after this most of the lab are uses the same method.we gone skip to Blind sql injection
+- ==After this, most of the labs use the same method. We're going to skip to Blind SQL Injection.==
 
 ## Lab 11: Blind sql injection for Password Exploitation Script
 
